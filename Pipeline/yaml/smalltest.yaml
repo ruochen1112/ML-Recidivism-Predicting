@@ -1,0 +1,141 @@
+#################################
+#       JoCo  MLPP Project      #
+#     Model experiments         #
+#################################
+
+
+#################################
+# Type of Experiment            #
+#################################
+
+
+###############################
+# Labelling Details           #
+###############################
+label:
+  'recidivism'
+
+
+#################################
+# Feature Selection             #
+#################################
+
+features:
+    dob: False
+    sex: True
+    joco_resident: True
+    bail_amt: True
+    bailed_out: True
+    bail_less_than_5000: True
+    bail_btween_5000_and_7000: True
+    bail_over_7000: True
+    age_when_arrest: True
+    in_jail_length: True
+    race_american_indian_or_alaska_native: True
+    race_asian: True
+    race_b lack_or_african_american: True
+    race_other_race: True
+    race_white: True
+    case_type_cr: True
+    case_type_dv: True
+    case_type_jv: True
+    bail_type_ca: True
+    bail_type_gps: True
+    bail_type__miss: True
+    bail_type_orcd: True
+    bail_type_pps: True
+    bail_type_pr: True
+    bail_type_sur: True
+
+
+#################################
+#       Model selection         #
+#################################
+
+models: 
+
+    RandomForestClassifier: False
+    LogisticRegression: False
+    DecisionTreeClassifier: True
+    KNeighborsClassifier: False
+    AdaBoostClassifier: False        
+    linear.SVC: False
+    GaussianNB: False
+    svm.SVC: False
+    ExtraTreesClassifier: False
+    GradientBoostingClassifier: False
+
+parameters:
+
+    RandomForestClassifier:
+        random_state: [339,785,807]
+        n_estimators: [1,10,100,1000,10000]
+        max_depth: [1,5,10,20,50,100]
+        max_features: ['sqrt','log2']
+        min_samples_split: [2,5,10]
+
+    LogisticRegression:
+        random_state: [339,785,807]
+        C: [0.00001,0.0001,0.001,0.01,0.1,1,10]
+        penalty: ['l1','l2']
+
+    DecisionTreeClassifier:
+        random_state: [339,785,807]
+
+    
+    KNeighborsClassifier:
+        n_neighbors: [1,5,10,25,50,100]
+        weights: ['uniform','distance']
+        algorithm: ['auto','ball_tree','kd_tree']
+
+    AdaBoostClassifier:
+        random_state: [339,785,807]
+        algorithm: ['SAMME', 'SAMME.R']
+        n_estimators: [1,10,100,1000,10000]
+
+    linear.SVC:
+        C: [0.00001,0.0001,0.001,0.01,0.1,1,10]
+
+    GaussianNB: 
+
+    svm.SVC: 
+
+    ExtraTreesClassifier: 
+        n_estimators: [1,10,100,1000,10000]
+        criterion: ['gini', 'entropy'] 
+        max_depth: [1,5,10,20,50,100]
+        max_features: ['sqrt','log2']
+        min_samples_split: [2,5,10]
+
+    GradientBoostingClassifier:
+        random_state: [339,785,807]
+        n_estimators: [1,10,100,1000,10000]
+        learning_rate: [0.001,0.01,0.05,0.1,0.5]
+        subsample: [0.1,0.5,1.0]
+        max_depth: [1,3,5,10,20,50,100]
+
+
+#################################
+# Evaluation Thresholds         #
+#################################
+
+# Enter below the thresholds you would like to use to evaluate models.
+# Relative thresholds refer to percents (e.g., precision at 1%).
+# Absolute thresholds refer to numbers of people (e.g., precision at 100 people)
+# For each threshold type, the _end value should be one increment ABOVE the last
+# threshold you want evaluated.
+
+
+#######################
+# Relative Threshold #
+#######################
+relative_threshold_begin: 0
+relative_threshold_end: 101
+relative_threshold_increment: 1
+
+#######################
+# Absolute THhreshold #
+#######################
+absolute_threshold_begin: 0
+absolute_threshold_end: 2525
+absolute_threshold_increment: 25
